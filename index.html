@@ -5,27 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Business</title>
   <style>
-    body { font-family: sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-    header, footer { background: #333; color: white; text-align: center; padding: 1rem; }
-    main { padding: 2rem; }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: white;
+      color: black;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: #121212;
+      color: #eee;
+    }
+
+    header, footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 0.5rem 1rem;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
   </style>
 </head>
 <body>
+  <button class="dark-toggle" onclick="toggleDark()">🌙 Dark Mode</button>
+
   <header>
     <h1>My Business</h1>
     <p>We provide awesome services</p>
   </header>
+
   <main>
     <h2>Our Services</h2>
     <ul>
       <li>Web Design</li>
       <li>Consulting</li>
     </ul>
+
     <h2>Contact</h2>
     <p>Email: contact@mybusiness.com</p>
   </main>
+
   <footer>
     &copy; 2025 My Business
   </footer>
+
+  <script>
+    function toggleDark() {
+      document.body.classList.toggle("dark-mode");
+      const isDark = document.body.classList.contains("dark-mode");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    };
+  </script>
 </body>
 </html>
